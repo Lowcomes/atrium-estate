@@ -36,6 +36,7 @@ import {
 import { C, Icon, Modal, fileOp } from "./shared";
 import { Edit, Picker, Workflow } from "./Actions";
 import Dashboard from "./Dashboard";
+import TutorialButton from "./TutorialButton";
 import { Registry, Details } from "./Registry";
 import {
   MapView,
@@ -125,6 +126,7 @@ function App() {
       key = (e) => {
         if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
           e.preventDefault();
+          if (document.body.classList.contains("driver-active")) return;
           modal({ kind: "search" });
         }
         if (e.key === "Escape") setMobile(false);
@@ -277,6 +279,11 @@ function App() {
               <b>{navLabels[t] || titles[t]}</b>
             </div>
             <div className="tools">
+              <TutorialButton
+                key={JSON.stringify(path) + r}
+                section={t}
+                detail={Boolean(id)}
+              />
               <button
                 className="global-search"
                 onClick={() => modal({ kind: "search" })}

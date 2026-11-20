@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { existsSync } from "node:fs";
 import { chromium } from "playwright-core";
+import { checkTutorial } from "./tutorial.mjs";
 const url = process.env.ATRIUM_URL || "http://127.0.0.1:4192/";
 const executablePath =
   process.env.CHROME_PATH ||
@@ -59,6 +60,7 @@ async function add(t, fields, selects = {}) {
 try {
   await visit("home");
   assert.equal((await db()).buildings.length, 52);
+  await checkTutorial(page, url);
   for (const t of [
     "buildings",
     "rooms",

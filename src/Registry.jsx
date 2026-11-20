@@ -610,6 +610,7 @@ export function Details({ t, id }) {
             <button
               className={"btn " + (i === 0 ? "primary" : "secondary")}
               key={a.key}
+              data-tour-action={a.key}
               onClick={() => modal({ kind: "workflow", t, id, action: a })}
             >
               {a.label}
@@ -620,6 +621,7 @@ export function Details({ t, id }) {
       {t === "ledger" && x.kind === "Начисление" && unpaid(s, x) > 0 && (
         <button
           className="btn primary mb"
+          data-tour-action="payment"
           onClick={() =>
             modal({
               kind: "edit",
